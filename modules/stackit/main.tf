@@ -18,14 +18,8 @@ ephemeral "stackit_ske_kubeconfig" "stackit_ske" {
     cluster_name = stackit_ske_cluster.stackit_ske.id != "" ? stackit_ske_cluster.stackit_ske.name : ""
 }
 
-resource "helm_release" "kyverno" {
-    name             = "kyverno"
-    repository       = "https://kyverno.github.io/kyverno/"
-    chart            = "kyverno"
-    namespace        = "kyverno"
-    create_namespace = true
-
-    depends_on = [
-        stackit_ske_cluster.stackit_ske
-    ]
+resource "stackit_ske_kubeconfig" "kubeconfig" {
+  project_id   = var.stackit_project_id
+  cluster_name = stackit_ske_cluster.stackit_ske.name
+  refresh      = true
 }
