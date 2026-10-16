@@ -1,0 +1,1 @@
+Provider unspecific modules that are installed via for example helm_release or kubernetes manifests.
